@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style_cad.css">
+    <script src="../js/veiculo_cadastrar.js" defer></script>
+    <title>Cadastro de Veículo</title>
+</head>
+<body>
+    <header>
+        <nav><a href="../index.html">Home</a></nav>
+        <br><hr><br>
+    </header>
+    <main>
+        <h1>Cadastrar Veículo</h1>
+        <form>
+            <label for="modelo">Modelo</label><br>
+            <input type="text" id="modelo" maxlength="50" required><br><br>
+
+            <label for="marca">Marca</label><br>
+            <input type="text" id="marca" maxlength="50" required><br><br>
+
+            <label for="placa">Placa</label><br>
+            <input type="text" id="placa" required><br><br>
+
+            <label for="codigoRastreio">Código de Rastreio</label><br>
+            <input type="text" id="codigoRastreio" required><br><br>
+
+            <label for="idCliente">Código do Cliente (Dono)</label><br>
+            <input type="number" id="idCliente" required><br><br>
+
+            <button id="btn_cadastrar">Cadastrar</button>
+        </form>
+        <div id="resposta" class="resposta"></div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,197 @@
+### 1. Testar CPF com tamanho incorreto (Deve retornar erro 400)
+POST http://localhost:3000/cliente
+Content-Type: application/json
+
+{
+    "nome": "Teste Tamanho CPF",
+    "email": "erro@gmail.com",
+    "senha": "123",
+    "cpf": "12345",
+    "endereco": "Rua Teste, 0",
+    "celular": "48900000000"
+}
+
+### 2. Cadastrar cliente 1 - Marcos (Público)
+POST http://localhost:3000/cliente
+Content-Type: application/json
+
+{
+    "nome": "Marcos",
+    "email": "marcos@gmail.com",
+    "senha": "123",
+    "cpf": "12345678912",
+    "endereco": "Rua das Flores, 123",
+    "celular": "48999998888"
+}
+
+### 3. Cadastrar cliente 2 - Ana (Público)
+POST http://localhost:3000/cliente
+Content-Type: application/json
+
+{
+    "nome": "Ana",
+    "email": "ana@gmail.com",
+    "senha": "123",
+    "cpf": "22233344455",
+    "endereco": "Av. Brasil, 456",
+    "celular": "48988887777"
+}
+
+### 4. Cadastrar cliente 3 - Roberto (Público)
+POST http://localhost:3000/cliente
+Content-Type: application/json
+
+{
+    "nome": "Roberto",
+    "email": "roberto@gmail.com",
+    "senha": "123",
+    "cpf": "98765432100",
+    "endereco": "Rua Central, 789",
+    "celular": "48977776666"
+}
+
+### 5. Fazer Login com Marcos (Armazena o token automaticamente)
+# @name loginReq
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email": "marcos@gmail.com",
+    "senha": "123"
+}
+
+### 6. Listar Todos os clientes (Privado)
+GET http://localhost:3000/clientes
+Authorization: {{loginReq.response.body.token}}
+
+### 7. Consultar cliente por ID (Privado)
+GET http://localhost:3000/cliente/1
+Authorization: {{loginReq.response.body.token}}
+
+### 8. Consultar cliente por Nome (Route Param)
+GET http://localhost:3000/cliente/buscarNome/Marcos
+Authorization: {{loginReq.response.body.token}}
+
+### 9. Consultar cliente por Nome Inexistente (Deve retornar 404)
+GET http://localhost:3000/cliente/buscarNome/Nome Inexistente
+Authorization: {{loginReq.response.body.token}}
+
+### 10. Atualizar cliente 1 (Privado)
+PUT http://localhost:3000/cliente/1
+Content-Type: application/json
+Authorization: {{loginReq.response.body.token}}
+
+{
+    "nome": "Marcos",
+    "email": "marcos@gmail.com",
+    "endereco": "Rua das Flores, 456",
+    "celular": "48999998888"
+}
+
+### 11. Cadastrar Veiculo 1 (Marcos)
+POST http://localhost:3000/veiculo
+Content-Type: application/json
+Authorization: {{loginReq.response.body.token}}
+
+{
+    "modelo": "saveiro surf",
+    "marca": "volkswagen",
+    "placa": "1234567",
+    "codigoRastreio": "12",
+    "idCliente": 1
+}
+
+### 12. Cadastrar Veiculo 2 (Ana)
+POST http://localhost:3000/veiculo
+Content-Type: application/json
+Authorization: {{loginReq.response.body.token}}
+
+{
+    "modelo": "uno 2006",
+    "marca": "fiat",
+    "placa": "3245678",
+    "codigoRastreio": "13",
+    "idCliente": 2
+}
+
+### 13. Cadastrar Veiculo 3 (Roberto)
+POST http://localhost:3000/veiculo
+Content-Type: application/json
+Authorization: {{loginReq.response.body.token}}
+
+{
+    "modelo": "mobi",
+    "marca": "fiat",
+    "placa": "tocompreguica",
+    "codigoRastreio": "14",
+    "idCliente": 3
+}
+
+### 14. Cadastrar Agendamento 1 (Data: 25/10/2026 - Marcos)
+POST http://localhost:3000/agendamento
+Content-Type: application/json
+Authorization: {{loginReq.response.body.token}}
+
+{
+    "data": "2026-10-25T14:00:00",
+    "tipo": "revisao",
+    "idVeiculo": 1,
+    "idCliente": 1
+}
+
+### 15. Cadastrar Agendamento 2 (Data: 05/10/2026 - Ana)
+POST http://localhost:3000/agendamento
+Content-Type: application/json
+Authorization: {{loginReq.response.body.token}}
+
+{
+    "data": "2026-10-25T14:00:00",
+    "tipo": "manutencao",
+    "idVeiculo": 2,
+    "idCliente": 2
+}
+
+### 16. Cadastrar Agendamento 3 (Data: 15/10/2026 - Roberto)
+POST http://localhost:3000/agendamento
+Content-Type: application/json
+Authorization: {{loginReq.response.body.token}}
+
+{
+    "data": "2026-10-25T14:00:00",
+    "tipo": "instalacao",
+    "idVeiculo": 3,
+    "idCliente": 3
+}
+
+### 17. Atualizar Agendamento 1 (Altera data para 30/10/2026)
+PUT http://localhost:3000/agendamento/1
+Content-Type: application/json
+Authorization: {{loginReq.response.body.token}}
+
+{
+    "data": "2026-10-25T14:00:00"
+}
+
+### 18. Atualizar Agendamento Inexistente (Deve retornar erro 404)
+PUT http://localhost:3000/agendamento/999
+Content-Type: application/json
+Authorization: {{loginReq.response.body.token}}
+
+{
+    "data": "2026-10-25T14:00:00"
+}
+
+### 19. Listar Agenda Ordenada por Data (Deve retornar a ordem: 05/10, 15/10 e 30/10)
+GET http://localhost:3000/agendamentos
+Authorization: {{loginReq.response.body.token}}
+
+### 20. Testar Rota Protegida Sem Token (Deve retornar erro 401/403)
+GET http://localhost:3000/agendamentos
+
+### 21. Deletar cliente Inexistente (Deve retornar 404)
+DELETE http://localhost:3000/cliente/999
+Authorization: {{loginReq.response.body.token}}
+
+### 22. Deletar cliente 3 (Roberto)
+DELETE http://localhost:3000/cliente/3
+Authorization: {{loginReq.response.body.token}}

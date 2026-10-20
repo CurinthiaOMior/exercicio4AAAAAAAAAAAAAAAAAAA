@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style_cad.css">
+    <script src="../js/agendamento_atualizar.js" defer></script>
+    <title>Atualizar Agendamento</title>
+</head>
+<body>
+    <header>
+        <nav><a href="../index.html">Home</a></nav>
+        <br><hr><br>
+    </header>
+    <main>
+        <h1>Atualizar Agendamento</h1>
+        <form>
+            <label for="id">Código do Agendamento</label><br>
+            <input type="number" id="id" required><br><br>
+
+            <label for="data">Data e Horário</label><br>
+            <input type="datetime-local" id="data"><br><br>
+
+            <label for="tipo">Tipo de Serviço</label><br>
+            <select id="tipo">
+                <option value="">Manter atual</option>
+                <option value="revisao">Revisão</option>
+                <option value="manutencao">Manutenção</option>
+                <option value="instalacao">Instalação</option>
+            </select><br><br>
+
+            <label for="idVeiculo">Código do Veículo</label><br>
+            <input type="number" id="idVeiculo"><br><br>
+
+            <label for="idCliente">Código do Cliente</label><br>
+            <input type="number" id="idCliente"><br><br>
+
+            <button id="btn_atualizar">Atualizar</button>
+        </form>
+        <div id="resposta" class="resposta"></div>
+    </main>
+</body>
+</html>

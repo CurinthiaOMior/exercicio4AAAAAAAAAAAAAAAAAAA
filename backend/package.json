@@ -1,0 +1,10 @@
+{
+    "dependencies": {
+      "cors": "^2.8.6",
+      "crypto-js": "^4.2.0",
+      "express": "^5.2.1",
+      "mysql2": "^3.24.3",
+      "sequelize": "^6.37.8"
+    }
+  }
+  
